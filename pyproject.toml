@@ -1,0 +1,57 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "django-expertise"
+version = "0.1.0"
+description = "Django + HTMX + Hyperscript expertise toolkit: anti-pattern sentinel and interactivity router"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+authors = [
+    { name = "Franki", email = "you@example.com" },
+]
+keywords = ["django", "htmx", "hyperscript", "lint", "static-analysis"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = [
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+]
+
+[project.scripts]
+django-expertise = "django_expertise.cli:main"
+django-expertise-sentinel = "django_expertise.cli:sentinel_main"
+django-expertise-router = "django_expertise.cli:router_main"
+
+[project.urls]
+Homepage = "https://github.com/franki/django-expertise"
+Repository = "https://github.com/franki/django-expertise"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/django_expertise"]
+
+[tool.hatch.build.targets.sdist]
+include = [
+    "/src",
+    "/tests",
+    "/README.md",
+    "/LICENSE",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

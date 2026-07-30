@@ -1,0 +1,217 @@
+# Anti-Pattern Sentinel — Registry (machine-readable)
+# Canonical source: K3 Swarm Spec §2.1 and §7.
+# severity: error = must fix before accept; warning = review / justify.
+# detection types: ast (python AST), regex, template-pattern, heuristic, manual.
+
+meta:
+  name: anti-pattern-sentinel
+  version: 1.0.0
+  spec: k3-swarm-django-htmx-spec §2.1 / §7
+  file_types: [py, html, htm, js]
+
+anti_patterns:
+
+  - id: A-001
+    name: Signals for Business Logic
+    why_wrong: >
+      Hidden side effects, hard to debug, breaks the explicit request/response
+      flow. Signals are framework-level hooks, not business logic carriers.
+    django_way: >
+      Explicit service-layer calls in views/forms; use signals only for
+      framework-level instrumentation (audit, request lifecycle).
+    ref: https://docs.djangoproject.com/en/stable/topics/signals/
+    severity: error
+    detectors:
+      - type: ast
+        hint: FunctionDef/AsyncFunctionDef decorated with @receiver(post_save|pre_save|pre_delete|post_delete|m2m_changed, ...) in app code.
+        implemented: true
+      - type: ast
+        hint: Call to `<Signal>.connect(...)` where signal is post_save/pre_save/pre_delete/post_delete/m2m_changed.
+        implemented: true
+
+  - id: A-002
+    name: Custom User Model Without Need
+    why_wrong: Unnecessary migration complexity; AbstractBaseUser reimplements auth plumbing Django already provides.
+    django_way: Extend AbstractUser, add a OneToOne Profile model, or use a JSONField on the profile.
+    ref: https://docs.djangoproject.com/en/stable/topics/auth/customizing/
+    severity: warning
+    detectors:
+      - type: ast
+        hint: ClassDef subclassing AbstractBaseUser without a docstring or comment justifying the full custom user.
+        implemented: true
+
+  - id: A-003
+    name: N+1 Queries in Templates
+    why_wrong: Each loop iteration hits the database for related objects (e.g. {{ product.category.name }}).
+    django_way: Use select_related()/prefetch_related() in the View queryset.
+    ref: https://docs.djangoproject.com/en/stable/ref/models/querysets/#prefetch-related
+    severity: warning
+    detectors:
+      - type: heuristic
+        hint: >
+          Template `{% for x in <var> %}` where `<var>` is a queryset context variable,
+          combined with a chain access `{{ item.<rel>.<attr> }}` inside the loop, while
+          the corresponding view file (views.py in the scanned tree) shows no
+          select_related/prefetch_related for that variable.
+        implemented: true
+
+  - id: A-004
+    name: Business Logic in Templates
+    why_wrong: Templates should be presentation-only; complex {% if %} chains and DB work in template tags are untestable.
+    django_way: Model methods, Manager methods, or View-computed context.
+    ref: https://docs.djangoproject.com/en/stable/ref/templates/language/
+    severity: error
+    detectors:
+      - type: regex
+        hint: ORM calls (`.objects.`, `.filter(`, `.get(` on models) inside templatetags/*.py files, especially in @register.simple_tag functions.
+        implemented: true
+      - type: template-pattern
+        hint: More than 3 nested {% if %} levels in a template (if-chain complexity heuristic).
+        implemented: true
+
+  - id: A-005
+    name: Reinventing the Admin
+    why_wrong: Wasted effort building CRUD/dashboards the admin already handles.
+    django_way: Customize ModelAdmin (list_display, inlines, actions) or use django-jazzmin / django-admin-interface.
+    ref: https://django-jazzmin.readthedocs.io/
+    severity: warning
+    detectors:
+      - type: manual
+        hint: >
+          Manual review. Heuristics (custom 'dashboard' views duplicating ModelAdmin CRUD)
+          produce too many false positives; reviewer should check whether admin customization
+          was considered before hand-rolled CRUD.
+        implemented: false
+
+  - id: A-006
+    name: Raw SQL Without ORM Fallback
+    why_wrong: Loses Django's query optimization and SQL-injection protection.
+    django_way: Use the ORM; raw SQL only for complex reports, with params and a justification comment.
+    ref: https://docs.djangoproject.com/en/stable/topics/db/sql/
+    severity: warning
+    detectors:
+      - type: ast
+        hint: Call `<manager>.raw(...)` or `cursor.execute(...)` / `connection.cursor()` usage.
+        implemented: true
+
+  - id: A-007
+    name: Putting All Logic in Views
+    why_wrong: Views become bloated and untestable; business rules belong in models/services.
+    django_way: Service-layer pattern, model methods, Manager methods; views only orchestrate request/response.
+    ref: https://docs.djangoproject.com/en/stable/topics/class-based-views/intro/
+    severity: warning
+    detectors:
+      - type: heuristic
+        hint: View function body exceeding ~40 non-blank, non-comment lines while performing model mutation directly (status flips + .save() inline).
+        implemented: false
+      - type: manual
+        hint: Manual review of view size and responsibility split.
+        implemented: false
+
+  - id: A-008
+    name: Using Signals for Cache Invalidation
+    why_wrong: Race conditions and unclear flow; cache invalidation via post_save hides when caches are actually refreshed.
+    django_way: Explicit cache calls in save() overrides or in the service layer.
+    ref: https://docs.djangoproject.com/en/stable/topics/cache/
+    severity: warning
+    detectors:
+      - type: ast
+        hint: "@receiver(post_save|post_delete) whose function body calls cache.delete/cache.set/cache.clear (sub-case of A-001, flagged separately)."
+        implemented: true
+      - type: manual
+        hint: Manual review of implicit cache invalidation flows.
+        implemented: false
+
+  - id: A-009
+    name: Client-Side Routing for Internal Apps
+    why_wrong: Unnecessary complexity; breaks Django's URL resolver, template rendering and auth/session integration.
+    django_way: hx-boost + server-side routing; HTMX/Hyperscript only, no React/Vue/Angular.
+    ref: https://htmx.org/attributes/hx-boost/
+    severity: error
+    detectors:
+      - type: regex
+        hint: >
+          <script src> tags or import statements referencing react, react-dom, vue,
+          angular, next, nuxt, svelte in .html/.js files.
+        implemented: true
+
+  - id: A-010
+    name: JSON API for HTMX Endpoints
+    why_wrong: HTMX expects HTML fragments, not JSON; a JSON API duplicates the view layer.
+    django_way: Return partial templates from Views (render(request, '_partial.html', ...)).
+    ref: https://htmx.org/
+    severity: warning
+    detectors:
+      - type: heuristic
+        hint: JsonResponse returned from a view function whose name or module path suggests htmx usage (name contains htmx/hx/partial, or sibling templates use hx-* attributes).
+        implemented: true
+
+  - id: A-011
+    name: State in hx-vals or Data Attributes
+    why_wrong: Client-held state is fragile, hard to sync, and a security risk (tamperable).
+    django_way: Server-side state in database or session; hx-vals only for transient UI hints.
+    ref: https://htmx.org/attributes/hx-vals/
+    severity: warning
+    detectors:
+      - type: template-pattern
+        hint: hx-vals containing sensitive-looking keys (user_id, role, price, permission, is_admin) or data-* attributes carrying business state.
+        implemented: false
+      - type: manual
+        hint: Manual review of what state is pushed to the client.
+        implemented: false
+
+  - id: A-012
+    name: Inline Styles for HTMX Indicators
+    why_wrong: Inline style= on indicator elements is inconsistent and hard to maintain.
+    django_way: CSS classes + the htmx-indicator class / hx-indicator attribute pattern.
+    ref: https://htmx.org/attributes/hx-indicator/
+    severity: error
+    detectors:
+      - type: regex
+        hint: Element carrying class*="htmx-indicator" (or id referenced by hx-indicator) that also has an inline style= attribute.
+        implemented: true
+
+  - id: A-013
+    name: Missing Graceful Degradation
+    why_wrong: If the HTMX request fails or JS is disabled, partial-only views break the app.
+    django_way: Views check request.headers.get('HX-Request') and serve both full and partial templates.
+    ref: https://docs.djangoproject.com/en/stable/topics/http/shortcuts/#render
+    severity: error
+    detectors:
+      - type: ast
+        hint: View function that renders a partial template (filename starting with '_') but whose body never checks HX-Request / request.htmx.
+        implemented: true
+
+  - id: A-014
+    name: Over-Prefetching
+    why_wrong: prefetch_related/select_related on relations the template never uses causes memory bloat and slow queries.
+    django_way: Prefetch only what the template actually renders.
+    ref: https://docs.djangoproject.com/en/stable/ref/models/querysets/#prefetch-related
+    severity: warning
+    detectors:
+      - type: manual
+        hint: >
+          Manual review. Cross-referencing prefetched relations with template attribute
+          access requires full context resolution; reviewer checks each prefetch against
+          template usage.
+        implemented: false
+
+  - id: A-015
+    name: Using GenericForeignKey
+    why_wrong: Performance cost (extra joins, no DB-level integrity) and complexity; rarely the right tool.
+    django_way: Concrete model inheritance, explicit FKs, or a JSONField for flexible payloads.
+    ref: https://docs.djangoproject.com/en/stable/ref/contrib/contenttypes/
+    severity: warning
+    detectors:
+      - type: ast
+        hint: Assignment of GenericForeignKey(...) in a model class body.
+        implemented: true
+      - type: regex
+        hint: Import or usage of GenericForeignKey / GenericRelation from django.contrib.contenttypes.
+        implemented: true
+
+manual_review:
+  A-005: Check whether admin customization (ModelAdmin, jazzmin) was considered before hand-rolled CRUD.
+  A-007: Review view size/responsibility split; business rules belong in models or a service layer.
+  A-011: Review what state is pushed to the client via hx-vals / data-* attributes.
+  A-014: Cross-check each prefetch_related/select_related against actual template usage.
