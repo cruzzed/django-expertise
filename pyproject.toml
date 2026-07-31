@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "django-expertise"
+name = "kimi-django-expertise"
 version = "0.1.0"
 description = "Django + HTMX + Hyperscript expertise toolkit: anti-pattern sentinel and interactivity router"
 readme = "README.md"
@@ -39,8 +39,8 @@ django-expertise-sentinel = "django_expertise.cli:sentinel_main"
 django-expertise-router = "django_expertise.cli:router_main"
 
 [project.urls]
-Homepage = "https://github.com/franki/django-expertise"
-Repository = "https://github.com/franki/django-expertise"
+Homepage = "https://github.com/cruzzed/django-expertise"
+Repository = "https://github.com/cruzzed/django-expertise"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/django_expertise"]

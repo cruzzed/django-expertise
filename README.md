@@ -5,13 +5,13 @@ A reusable toolkit for Django + HTMX + Hyperscript projects. It bundles the K3 S
 ## Install
 
 ```bash
-pip install django-expertise
+pip install kimi-django-expertise
 ```
 
 Or with `uv`:
 
 ```bash
-uv add --dev django-expertise
+uv add --dev kimi-django-expertise
 ```
 
 ## Commands
