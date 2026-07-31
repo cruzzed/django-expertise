@@ -1,6 +1,6 @@
 # django-expertise
 
-A reusable toolkit for Django + HTMX + Hyperscript projects. It bundles the K3 Swarm anti-pattern sentinel, two-phase interactivity router, and Kimi Code persona prompts into an installable Python package.
+A reusable toolkit for Django + HTMX + Hyperscript projects. It bundles the K3 Swarm anti-pattern sentinel, two-phase interactivity router, Kimi Code persona prompts, and a structured Django knowledge base into an installable Python package.
 
 ## Install
 
@@ -32,6 +32,11 @@ django-expertise-router handoff my_template.html
 django-expertise install --target project
 django-expertise install --target user
 django-expertise install --target project --force
+
+# Inspect the bundled knowledge base
+django-expertise kb list
+django-expertise kb show anti-a001-signals-business-logic
+django-expertise kb index
 ```
 
 ## Project configuration
@@ -53,6 +58,7 @@ A-013 = ["myapp/htmx_only_views.py"]
 - `django_expertise.sentinel` — static anti-pattern scanner for Python, HTML, and JS.
 - `django_expertise.router` + `django_expertise.gates` — two-phase interactivity router and quality gates.
 - `django_expertise.kimi.skills` and `django_expertise.kimi.agents` — Kimi Code persona files.
+- `django_expertise.knowledge_base` — bundled knowledge base with 68 chunks covering Django core, contrib modules, HTMX, Hyperscript, anti-patterns, and workflow handoffs.
 
 ## Development
 
@@ -66,8 +72,8 @@ pytest
 This package uses PyPI trusted publishing. Push a tag and the GitHub Actions release workflow builds and uploads the wheel/sdist:
 
 ```bash
-git tag v0.1.0
-git push origin v0.1.0
+git tag v0.1.1
+git push origin v0.1.1
 ```
 
 ## License
