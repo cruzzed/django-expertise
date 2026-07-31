@@ -1,3 +1,3 @@
 """Django expertise toolkit for Django + HTMX + Hyperscript projects."""
 
-__version__ = "0.1.3"
+__version__ = "0.1.4"

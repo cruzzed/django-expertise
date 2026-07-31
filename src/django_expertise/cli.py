@@ -57,11 +57,11 @@ def _iter_kb_assets():
             yield chunks_root, Path("knowledge-base") / "chunks"
 
 
-def _copy_asset(src, dest: Path, force: bool, dry_run: bool) -> bool:
+def _copy_asset(src, dest: Path, skip_existing: bool, dry_run: bool) -> bool:
     if dry_run:
         print(f"would install: {dest}")
         return False
-    if dest.exists() and not force:
+    if dest.exists() and skip_existing:
         print(f"skip existing: {dest}")
         return False
     dest.parent.mkdir(parents=True, exist_ok=True)
@@ -93,13 +93,13 @@ def cmd_install(args):
     if not args.kb_only:
         for src, rel in _iter_kimi_assets():
             dest = base / rel
-            if _copy_asset(src, dest, args.force, args.dry_run):
+            if _copy_asset(src, dest, args.skip_existing, args.dry_run):
                 installed += 1
 
     if not args.assets_only:
         for src, rel in _iter_kb_assets():
             dest = base / rel
-            if _copy_asset(src, dest, args.force, args.dry_run):
+            if _copy_asset(src, dest, args.skip_existing, args.dry_run):
                 installed += 1
 
     if not args.dry_run:
@@ -187,7 +187,9 @@ def main(argv=None):
         help="Install into the current project (.kimi-code/) or the user directory (~/.kimi-code/)",
     )
     install_parser.add_argument(
-        "--force", action="store_true", help="Overwrite existing files"
+        "--skip-existing",
+        action="store_true",
+        help="Leave existing files in place instead of overwriting (default: overwrite)",
     )
     install_parser.add_argument(
         "--dry-run", action="store_true", help="Print what would be installed"

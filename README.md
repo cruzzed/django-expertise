@@ -29,9 +29,10 @@ django-expertise-router validate-phase2 my_template.html
 django-expertise-router handoff my_template.html
 
 # Install Kimi Code skills/agents into the current project or user directory
+# (overwrites existing files by default; use --skip-existing to leave them alone)
 django-expertise install --target project
 django-expertise install --target user
-django-expertise install --target project --force
+django-expertise install --target project --skip-existing
 
 # Inspect the bundled knowledge base
 django-expertise kb list
@@ -72,8 +73,8 @@ pytest
 This package uses PyPI trusted publishing. Push a tag and the GitHub Actions release workflow builds and uploads the wheel/sdist:
 
 ```bash
-git tag v0.1.3
-git push origin v0.1.3
+git tag v0.1.4
+git push origin v0.1.4
 ```
 
 ## License
