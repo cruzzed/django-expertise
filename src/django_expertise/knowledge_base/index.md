@@ -1,4 +1,4 @@
-# K3 Swarm Knowledge Base Index
+# Django Expertise Knowledge Base Index
 
 Total chunks: 68
 

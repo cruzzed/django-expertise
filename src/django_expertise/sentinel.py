@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Anti-Pattern Sentinel — K3 Swarm deliverable #4.
+"""Anti-Pattern Sentinel for Django + HTMX + Hyperscript projects.
 
 Static validation layer that flags violations of the Django + HTMX +
 Hyperscript anti-pattern registry (spec sections 2.1 and 7) during code

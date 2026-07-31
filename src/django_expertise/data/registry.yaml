@@ -1,12 +1,12 @@
 # Anti-Pattern Sentinel — Registry (machine-readable)
-# Canonical source: K3 Swarm Spec §2.1 and §7.
+# Canonical source: django-expertise spec §2.1 and §7.
 # severity: error = must fix before accept; warning = review / justify.
 # detection types: ast (python AST), regex, template-pattern, heuristic, manual.
 
 meta:
   name: anti-pattern-sentinel
   version: 1.0.0
-  spec: k3-swarm-django-htmx-spec §2.1 / §7
+  spec: django-expertise-spec §2.1 / §7
   file_types: [py, html, htm, js]
 
 anti_patterns:

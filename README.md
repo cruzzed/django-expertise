@@ -1,6 +1,6 @@
 # django-expertise
 
-A reusable toolkit for Django + HTMX + Hyperscript projects. It bundles the K3 Swarm anti-pattern sentinel, two-phase interactivity router, Kimi Code persona prompts, and a structured Django knowledge base into an installable Python package.
+A reusable toolkit for Django + HTMX + Hyperscript projects. It bundles an anti-pattern sentinel, two-phase interactivity router, Kimi Code persona prompts, and a structured Django knowledge base into an installable Python package.
 
 ## Install
 
@@ -72,8 +72,8 @@ pytest
 This package uses PyPI trusted publishing. Push a tag and the GitHub Actions release workflow builds and uploads the wheel/sdist:
 
 ```bash
-git tag v0.1.1
-git push origin v0.1.1
+git tag v0.1.2
+git push origin v0.1.2
 ```
 
 ## License
