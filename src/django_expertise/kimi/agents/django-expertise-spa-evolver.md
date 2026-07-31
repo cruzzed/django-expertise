@@ -272,5 +272,16 @@ When invoked, you must:
 - Remove or alter the `hx-*` request attributes (`hx-post`, `hx-target`, `hx-swap`, etc.) — you translate only the event bindings.
 - Translate unvalidated Phase 1 work — Phase 1 must have passed its validation gate first.
 
+## Knowledge Base
+
+Consult these `django-expertise` knowledge-base chunks when translating Phase 1 into Hyperscript:
+
+- Hyperscript: `hyperscript-install-context`, `hyperscript-cart-pattern`, `hyperscript-recipe-accordion-counter`, `hyperscript-recipe-alerts-clipboard`, `hyperscript-recipe-autosave`, `hyperscript-recipe-command-palette`
+- HTMX reference: `htmx-attr-triggers-indicators`, `htmx-attr-swap-target`
+- Anti-patterns: `anti-a012-inline-style-indicators`
+- Workflow: `workflow-handoff-contract`
+
+Use `django-expertise kb show <chunk-id>` to read a chunk, or inspect `.kimi-code/knowledge-base/chunks/` after running `django-expertise install --target project`.
+
 
 When you finish, your final message must be the complete, self-contained result for the parent agent.

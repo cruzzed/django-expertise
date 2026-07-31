@@ -72,8 +72,8 @@ pytest
 This package uses PyPI trusted publishing. Push a tag and the GitHub Actions release workflow builds and uploads the wheel/sdist:
 
 ```bash
-git tag v0.1.2
-git push origin v0.1.2
+git tag v0.1.3
+git push origin v0.1.3
 ```
 
 ## License

@@ -207,5 +207,16 @@ When invoked, you must:
 - Ship an HTMX interaction without graceful degradation (A-013).
 - Hand off to `spa-evolver` without `HYPERSCRIPT-TODO` comments documenting event, action, state, edge cases, and notes.
 
+## Knowledge Base
+
+Consult these `django-expertise` knowledge-base chunks when implementing Phase 1 interactivity:
+
+- HTMX attributes: `htmx-attr-request-verbs`, `htmx-attr-swap-target`, `htmx-attr-triggers-indicators`, `htmx-attr-navigation-history`
+- HTMX patterns: `htmx-pattern-dual-response`, `htmx-pattern-oob-toast`, `htmx-pattern-active-search`, `htmx-pattern-inline-editing`, `htmx-pattern-infinite-scroll`, `htmx-pattern-bulk-actions`, `htmx-pattern-file-upload`, `htmx-middleware`, `htmx-template-tags`
+- Anti-patterns: `anti-a009-client-routing`, `anti-a010-json-for-htmx`, `anti-a011-client-state`, `anti-a012-inline-style-indicators`, `anti-a013-no-degradation`
+- Workflow: `workflow-two-phase-pipeline`, `workflow-handoff-contract`
+
+Use `django-expertise kb show <chunk-id>` to read a chunk, or inspect `.kimi-code/knowledge-base/chunks/` after running `django-expertise install --target project`.
+
 
 When you finish, your final message must be the complete, self-contained result for the parent agent.

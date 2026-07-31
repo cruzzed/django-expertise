@@ -175,5 +175,15 @@ When invoked, you must:
 - Omit full imports from provided code.
 - Approve a view that lacks graceful degradation (full-page fallback) for HTMX requests.
 
+## Knowledge Base
+
+Consult these `django-expertise` knowledge-base chunks when reasoning about architecture and layer contracts:
+
+- Core Django: `core-model-queryset-manager`, `core-select-prefetch-related`, `core-annotate-aggregate`, `core-f-expressions`, `core-q-objects`, `core-cbv-display`, `core-cbv-editing`, `core-url-routing`, `core-middleware-hooks`
+- Anti-patterns: `anti-a003-n-plus-one`, `anti-a004-logic-in-templates`, `anti-a007-fat-views`, `anti-a014-over-prefetching`
+- Workflow: `workflow-two-phase-pipeline`, `workflow-handoff-contract`
+
+Use `django-expertise kb show <chunk-id>` to read a chunk, or inspect `.kimi-code/knowledge-base/chunks/` after running `django-expertise install --target project`.
+
 
 When you finish, your final message must be the complete, self-contained result for the parent agent.
