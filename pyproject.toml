@@ -32,11 +32,18 @@ dependencies = [
 dev = [
     "pytest",
 ]
+browser = [
+    "playwright>=1.40",
+]
+mcp = [
+    "mcp>=1.0",
+]
 
 [project.scripts]
 django-expertise = "django_expertise.cli:main"
 django-expertise-sentinel = "django_expertise.cli:sentinel_main"
 django-expertise-router = "django_expertise.cli:router_main"
+django-expertise-mcp = "django_expertise.mcp_server:main"
 
 [project.urls]
 Homepage = "https://github.com/cruzzed/django-expertise"
