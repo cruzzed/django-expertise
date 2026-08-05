@@ -77,6 +77,12 @@ git tag v0.1.5
 git push origin v0.1.5
 ```
 
+## Skill precedence when mixing with other plugins
+
+Based on real usage by the creator, depending on your needs you may need to strictly and explicitly state a precedence for skill-usage priority when using other project-based skills that have mandates of their own. For example:
+
+> For Django + HTMX + Hyperscript work, `django-expertise` roles take precedence over generic autonomous-execution plugins such as Superpowers. Superpowers skills may be used for workflow mechanics (todos, worktrees, reviews), but they may not override the role-based delegation defined by `django-expertise`, the anti-pattern registry (A-001..A-015), or the design-gate / implementation-gate separation.
+
 ## License
 
 MIT
