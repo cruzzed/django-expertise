@@ -107,6 +107,11 @@ def cmd_install(args):
 
     if not args.dry_run:
         print(f"Installed {installed} asset(s) to {base}")
+        print(
+            f"Add the following directive to your AGENTS.md: "
+            f"'Always read {base / 'knowledge-base' / 'chunks' / 'tools-cli.md'} "
+            f"when using django-expertise debug tooling.'"
+        )
     return 0
 
 
