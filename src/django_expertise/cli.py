@@ -10,6 +10,7 @@ import importlib.resources as _resources
 
 from django_expertise import browser, router, sentinel
 from django_expertise.debug import probe, request, runner
+from django_expertise.debug import views as debug_views
 from django_expertise import setup_dev
 from django_expertise import mcp_server
 
@@ -156,6 +157,34 @@ def cmd_kb(args):
     return 1
 
 
+def cmd_debug_last_request(args):
+    """Print the last captured request observation as JSON."""
+    import os
+
+    if os.environ.get("DJANGO_SETTINGS_MODULE"):
+        import django
+        from django.http import HttpRequest
+
+        django.setup()
+
+        request = HttpRequest()
+        request.method = "GET"
+        response = debug_views.agent_last_request(request)
+        print(response.content.decode("utf-8"))
+        return 0
+
+    import urllib.request
+
+    url = f"http://{args.host}:{args.port}/__agent__/last-request/"
+    try:
+        with urllib.request.urlopen(url, timeout=args.timeout) as resp:
+            print(resp.read().decode("utf-8"))
+        return 0
+    except Exception as exc:
+        print(f"Could not fetch observation: {exc}", file=sys.stderr)
+        return 1
+
+
 def cmd_debug(args):
     debug_command = args.debug_command
 
@@ -204,6 +233,9 @@ def cmd_debug(args):
         except Exception as exc:
             print(f"ERROR: {exc}", file=sys.stderr)
             return 1
+
+    if debug_command == "last-request":
+        return cmd_debug_last_request(args)
 
     print(f"Unknown debug command: {debug_command}", file=sys.stderr)
     return 1
@@ -400,6 +432,20 @@ def main(argv=None):
     debug_analyze_parser.add_argument("url", help="URL to request")
     debug_analyze_parser.add_argument("--htmx", action="store_true", help="Send HX-Request header")
     debug_analyze_parser.set_defaults(func=cmd_debug)
+
+    debug_last_request_parser = debug_sub.add_parser(
+        "last-request", help="Print the last captured MVT observation as JSON"
+    )
+    debug_last_request_parser.add_argument(
+        "--host", default="127.0.0.1", help="Dev server host (HTTP mode)"
+    )
+    debug_last_request_parser.add_argument(
+        "--port", type=int, default=8000, help="Dev server port (HTTP mode)"
+    )
+    debug_last_request_parser.add_argument(
+        "--timeout", type=int, default=5, help="Request timeout in seconds"
+    )
+    debug_last_request_parser.set_defaults(func=cmd_debug)
 
     browser_parser = sub.add_parser(
         "browser", help="Browser automation for HTMX/Hyperscript verification"
