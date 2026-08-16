@@ -31,6 +31,10 @@ def setup_devuser(
             "Pass --dev-mode to allow insecure local passwords, or choose a stronger password."
         )
 
+    from django_expertise._django import ensure_django_setup
+
+    ensure_django_setup()
+
     try:
         from django.contrib.auth import get_user_model
     except ImportError as exc:
@@ -76,6 +80,10 @@ def seed_fixtures(app_label: str | None = None, fixture_path: str | None = None)
     the function looks for fixtures named `<app_label>/fixtures/sample.json`
     or `<app_label>/fixtures/seed.json`.
     """
+    from django_expertise._django import ensure_django_setup
+
+    ensure_django_setup()
+
     try:
         from django.core.management import call_command
     except ImportError as exc:

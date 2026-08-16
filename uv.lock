@@ -374,7 +374,7 @@ wheels = [
 
 [[package]]
 name = "kimi-django-expertise"
-version = "0.1.5"
+version = "0.2.0b3"
 source = { editable = "." }
 dependencies = [
     { name = "pyyaml" },
