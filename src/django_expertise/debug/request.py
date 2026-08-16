@@ -41,6 +41,15 @@ def analyze_request(url: str, htmx: bool = False) -> RequestAnalysis:
     the Django test client cannot be used.
     """
     try:
+        import django
+        from django.apps import apps
+        from django.conf import settings
+
+        if not settings.configured:
+            django.setup()
+        elif not apps.ready:
+            django.setup()
+
         from django.test import Client
         from django.urls import resolve
     except ImportError as exc:
