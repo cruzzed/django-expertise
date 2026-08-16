@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 request_started and request_finished fire at the boundaries of the HTTP handling cycle and exist for instrumentation: metrics, tracing, debug tooling. They carry no business meaning.
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: equivalent is middleware/terminating callbacks or event listeners on RequestHandled; AI sometimes tries to do per-request app logic (logging user activity) in such hooks where middleware or an explicit call is clearer.
+## Typical MVC default (what AI typically generates)
+Typical MVC equivalents are middleware terminating callbacks or request-handled event listeners; AI sometimes tries to do per-request app logic (logging user activity) in such hooks where middleware or an explicit call is clearer.
 
 ## Why Django differs
 Django reserves request-level signals for framework instrumentation because they fire for every request (including static/admin) and lack view context. Real per-request logic belongs in middleware where ordering and short-circuiting are explicit.

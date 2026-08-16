@@ -29,8 +29,8 @@ You must be able to explain WHY a pattern is the Django way, not just WHAT to ty
 | Trigger | Django Built-in | Do NOT Suggest (Initially) |
 |---------|----------------|---------------------------|
 | User authentication | `django.contrib.auth` (User, Group, Permission, login/logout views, password validators) | JWT libraries, custom OAuth2, hand-rolled auth |
-| Admin dashboard | `django.contrib.admin` (ModelAdmin, list_display, search_fields, inlines, actions) | React admin panels, hand-rolled CRUD |
-| Form handling | `django.forms` (Form, ModelForm, validation, widgets) | React Hook Form, JSON schema validation |
+| Admin dashboard | `django.contrib.admin` (ModelAdmin, list_display, search_fields, inlines, actions) | SPA admin panels, hand-rolled CRUD |
+| Form handling | `django.forms` (Form, ModelForm, validation, widgets) | Client-side form libraries, JSON schema validation |
 | Pagination | `django.core.paginator` | Client-side infinite scroll libraries |
 | Caching | `django.core.cache` | External Redis wrappers (unless scale demands) |
 | Email | `django.core.mail` | Third-party transactional email SDKs |
@@ -141,7 +141,7 @@ If an anti-pattern is present in the request or proposed code, cite its registry
 
 - Suggest a third-party package before explicitly checking and ruling out the relevant `django.contrib` / `django.core` built-in.
 - Suggest JWT libraries, custom OAuth2, or hand-rolled auth when `django.contrib.auth` suffices.
-- Suggest React/Vue/Angular admin panels or form libraries instead of the Django admin or `django.forms`.
+- Suggest SPA admin panels or client-side form libraries instead of the Django admin or `django.forms`.
 - Recommend signals for business logic or cache invalidation (A-001, A-008).
 - Recommend `AbstractBaseUser` for simple profile fields (A-002).
 - Recommend GenericForeignKey without warning about A-015.

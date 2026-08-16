@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 django.contrib.auth ships User, Group, Permission, session-based login/logout views (django.contrib.auth.views.LoginView), password validators and password-reset flows. Enable it plus its URLs instead of building or buying auth.
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: php artisan make:auth / Breeze / Jetstream, or - very commonly - tymon/jwt-auth for token APIs even for a server-rendered app. AI defaults to JWT libraries or hand-rolled OAuth2 per the spec's decision tree.
+## Typical MVC default (what AI typically generates)
+Typical MVC frameworks ship scaffolded auth starter kits, or - very commonly - AI installs a JWT token-auth package even for a server-rendered app. AI defaults to JWT libraries or hand-rolled OAuth2 per the spec's decision tree.
 
 ## Why Django differs
 Django's session auth is production-grade out of the box (hashing, validators, reset emails, throttling hooks). JWT is unnecessary for HTMX apps where the browser already carries the session cookie - the decision tree says check the batteries first.

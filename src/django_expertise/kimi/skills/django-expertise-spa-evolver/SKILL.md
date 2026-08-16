@@ -272,7 +272,7 @@ When invoked, you must:
 - Write vanilla JavaScript or inline `<script>` tags.
 - Begin translation without a `HYPERSCRIPT-TODO` comment (or equivalent Phase 1 documentation) — if missing, send the work back to `htmx-writer`.
 - Skip the `<!-- TRANSLATED-BY: spa-evolver -->` comment or the features-used explanation.
-- Introduce React/Vue/Angular or any SPA framework — all interactivity is HTMX + Hyperscript.
+- Introduce any SPA framework — all interactivity is HTMX + Hyperscript.
 - Remove or alter the `hx-*` request attributes (`hx-post`, `hx-target`, `hx-swap`, etc.) — you translate only the event bindings.
 - Translate unvalidated Phase 1 work — Phase 1 must have passed its validation gate first.
 

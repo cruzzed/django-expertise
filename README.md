@@ -98,7 +98,7 @@ A-013 = ["myapp/htmx_only_views.py"]
 
 | Concern | Recommended tool | Why |
 |---|---|---|
-| Models, schema, URLs, settings, read-only ORM queries | [`django-ai-boost`](https://github.com/vintasoftware/django-ai-boost) | MCP server inspired by Laravel Boost |
+| Models, schema, URLs, settings, read-only ORM queries | [`django-ai-boost`](https://github.com/vintasoftware/django-ai-boost) | MCP server for project introspection by AI assistants |
 | Request/response SQL, templates, cache, signals | [`django-debug-toolbar`](https://django-debug-toolbar.readthedocs.io/) or [`django-silk`](https://github.com/jazzband/django-silk) | Mature request introspection |
 | Interactive debugging | `pdb`, [`ipdb`](https://github.com/gotcha/ipdb), or [`debugpy`](https://github.com/microsoft/debugpy) | Standard Python debuggers |
 | Testing | [`pytest`](https://docs.pytest.org/) + [`pytest-django`](https://pytest-django.readthedocs.io/) | Standard test runner |

@@ -8,7 +8,7 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Return a partial containing several fragments, each marked hx-swap-oob, so one request updates the changed row AND appends a toast notification. Pair with django.contrib.messages on the non-HTMX fallback path.
 
-## Laravel / MVC default (what AI typically generates)
+## Typical MVC default (what AI typically generates)
 AI returns JSON {task: ..., message: ...} and writes client JS that updates the row DOM and calls a toast library (toastr/sweetalert) - two code paths to keep in sync.
 
 ## Why Django differs

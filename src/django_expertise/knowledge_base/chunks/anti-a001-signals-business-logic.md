@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Explicit service-layer calls in views/forms: order = form.save(); send_order_confirmation(order). Signals only for framework-level hooks like audit logging.
 
-## Laravel / MVC default (what AI typically generates)
-Using post_save (or Laravel model observers / Rails after_save callbacks) to send emails, update caches, or trigger side effects - the AI default because Laravel/Rails training data embraces model callbacks.
+## Typical MVC default (what AI typically generates)
+Using post_save (or typical MVC model observers / after-save callbacks) to send emails, update caches, or trigger side effects - the AI default because mainstream MVC training data embraces model callbacks.
 
 ## Why Django differs
 Hidden side effects make save() do surprising things, break in bulk operations and tests, and scatter business flow across receivers. Explicit calls keep control flow visible, debuggable, and testable.

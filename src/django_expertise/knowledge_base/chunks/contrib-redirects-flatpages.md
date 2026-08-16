@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 redirects stores old-path -> new-path pairs in the database, applied by RedirectFallbackMiddleware when no URL matches (legacy URL migration). flatpages serves simple database-editable static pages (About, Terms) via FlatpageFallbackMiddleware with a tiny template.
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: hardcoded Route::redirect() entries piling up in routes/web.php, or a CMS package for three static pages. AI builds a whole pages CRUD or installs a CMS for an About page.
+## Typical MVC default (what AI typically generates)
+Typical MVC stacks pile up hardcoded redirect entries in the routes file, or install a CMS package for three static pages. AI builds a whole pages CRUD or installs a CMS for an About page.
 
 ## Why Django differs
 Django ships both as lightweight batteries: editors manage redirects and simple pages in the admin with zero code. Writing custom controllers/migrations for legacy redirects or static content is reinvention.

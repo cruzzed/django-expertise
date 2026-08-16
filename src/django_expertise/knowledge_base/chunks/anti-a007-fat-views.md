@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Push business rules into model methods (order.cancel()), query logic into Managers, and cross-model orchestration into a service layer; views orchestrate request/response and template selection only.
 
-## Laravel / MVC default (what AI typically generates)
-Fat controllers: a 100-line Laravel controller method doing validation, business rules, emails, and redirects - or an MVC 'thin model, fat controller' style that AI generates by default.
+## Typical MVC default (what AI typically generates)
+Fat controllers: a 100-line controller method doing validation, business rules, emails, and redirects - the MVC 'thin model, fat controller' style that AI generates by default.
 
 ## Why Django differs
 Django MVT gives every concern a home: models own integrity/rules, views own orchestration, templates own presentation. Bloated views are untestable and duplicate logic across endpoints; model methods are reusable from admin, shell, and other views.
