@@ -1,0 +1,201 @@
+# django-expertise CLI usage manual
+
+This document describes the command-line tools shipped with `django-expertise`. Agents should consult this manual before using the toolkit so they invoke the right command for the right job.
+
+## Installation
+
+```bash
+pip install --pre kimi-django-expertise
+```
+
+Optional extras:
+
+```bash
+pip install --pre "kimi-django-expertise[browser]"   # Playwright browser tools
+pip install --pre "kimi-django-expertise[mcp]"       # MCP server
+```
+
+## Entry points
+
+| Command | Purpose |
+|---|---|
+| `django-expertise` | Main toolkit: install, KB, debug, browser, setup-dev, MCP server |
+| `django-expertise-sentinel` | Standalone anti-pattern scanner |
+| `django-expertise-router` | Standalone two-phase interactivity router |
+| `django-expertise-mcp` | Standalone MCP server (requires `[mcp]` extra) |
+
+## `django-expertise install`
+
+Install Kimi Code skills, agents, and knowledge base into the current project or user directory.
+
+```bash
+django-expertise install --target project
+django-expertise install --target user
+django-expertise install --target project --skip-existing
+```
+
+After installing, add this line to your project's `AGENTS.md`:
+
+> Always read `.kimi-code/knowledge-base/chunks/tools-cli.md` for using `django-expertise` tooling.
+
+Alternatively, invoke the `django-expertise-setup` skill to let the agent discover the installed artifacts and link them into your agent harness automatically.
+
+## `django-expertise kb`
+
+Inspect the bundled knowledge base.
+
+```bash
+django-expertise kb list          # list chunks by category
+django-expertise kb show <id>     # show a chunk
+django-expertise kb index         # dump chunks.jsonl
+django-expertise kb path          # print package path
+```
+
+## `django-expertise debug`
+
+Agent-friendly debugging wrappers. Requires a Django project with `DJANGO_SETTINGS_MODULE` set.
+
+### `debug test`
+
+Run a test with agent-friendly output.
+
+```bash
+django-expertise debug test sales.tests.test_checkout --pdb --sql
+django-expertise debug test myapp.tests --no-verbose --extra-args --tb=short
+```
+
+Flags:
+- `--pdb` — drop into the debugger on failure
+- `--sql` — log SQL queries
+- `--no-verbose` — disable verbose output
+- `--extra-args` — pass remaining arguments to the test runner
+
+### `debug runserver`
+
+Run the Django dev server with optional debug helpers.
+
+```bash
+django-expertise debug runserver --toolbar
+django-expertise debug runserver 0.0.0.0:8000 --silk
+```
+
+Flags:
+- `--toolbar` — verify `django-debug-toolbar` is available
+- `--silk` — verify `django-silk` is available
+
+### `debug probe`
+
+Insert or remove temporary debug probes into functions at runtime.
+
+```bash
+django-expertise debug probe insert sales.views.checkout --type print
+django-expertise debug probe insert sales.views.checkout --type breakpoint
+django-expertise debug probe remove sales.views.checkout
+django-expertise debug probe list
+```
+
+Probe types:
+- `print` — insert a bare marker `print()` at the start of the function
+- `breakpoint` — insert a builtin `breakpoint()` call at the start of the function
+
+### `debug analyze-request`
+
+Analyze a Django HTTP response for status code, templates, context keys, and SQL count (when django-debug-toolbar is configured).
+
+```bash
+django-expertise debug analyze-request /sales/checkout/ --htmx
+```
+
+## `django-expertise browser`
+
+Browser automation for HTMX/Hyperscript verification. Requires the `[browser]` extra (`playwright`).
+
+### `browser console`
+
+Capture browser console logs for a URL.
+
+```bash
+django-expertise browser console --url http://localhost:8000/sales/checkout --click "#submit"
+```
+
+### `browser snapshot`
+
+Capture rendered HTML. Returns JSON with `html` truncated to 2000 characters by default to keep agent context small.
+
+```bash
+django-expertise browser snapshot --url http://localhost:8000/sales/checkout
+django-expertise browser snapshot --url http://localhost:8000/sales/checkout --full
+```
+
+Flags:
+- `--full` — return the complete HTML without truncation
+
+### `browser htmx-trace`
+
+Trace an HTMX request/response cycle.
+
+```bash
+# Direct AJAX trace against an endpoint
+django-expertise browser htmx-trace --url http://localhost:8000/sales/checkout
+
+# Click an element on a page and trace the HTMX request it triggers
+django-expertise browser htmx-trace --url http://localhost:8000/sales/checkout --selector "#save-btn"
+```
+
+Flags:
+- `--selector` — CSS selector of the element to click; the tool navigates to `--url`, clicks the element, and captures the resulting HTMX request/response. If omitted, the tool makes a direct `htmx.ajax` call against `--url`.
+- `--swap` — HTMX swap strategy for direct AJAX mode (default: `innerHTML`)
+
+## `django-expertise setup-devuser`
+
+Create a local dev superuser non-interactively.
+
+```bash
+django-expertise setup-devuser --username admin --email admin@example.com --password admin --dev-mode
+```
+
+## `django-expertise seed-fixtures`
+
+Load or scaffold fixture data.
+
+```bash
+django-expertise seed-fixtures myapp --fixture fixtures/initial.json
+django-expertise seed-fixtures myapp --generate-template
+```
+
+## `django-expertise mcp`
+
+Start the `django-expertise` MCP server. Requires the `[mcp]` extra.
+
+```bash
+django-expertise mcp --transport stdio
+django-expertise mcp --transport sse --port 8001
+```
+
+MCP tools include `list_probes`, `insert_probe`, `remove_probe`, `analyze_request`, `browser_console`, `browser_snapshot`, `htmx_trace`, and `setup_devuser`.
+
+## `django-expertise-sentinel`
+
+Scan a project for anti-patterns A-001..A-015.
+
+```bash
+django-expertise-sentinel .
+django-expertise-sentinel src/ templates/
+```
+
+Configuration is read from `[tool.django-expertise]` in `pyproject.toml`.
+
+## `django-expertise-router`
+
+Route a task to the right persona or validate phase gates.
+
+```bash
+django-expertise-router route "add live search to the product list"
+django-expertise-router validate-phase1 my_template.html
+django-expertise-router validate-phase2 my_template.html
+django-expertise-router handoff my_template.html
+```
+
+## Skill precedence
+
+When using `django-expertise` alongside generic autonomous-execution plugins (e.g. Superpowers), `django-expertise` roles and conventions take precedence for Django + HTMX + Hyperscript work. Generic plugins may handle workflow mechanics (todos, worktrees, reviews), but they must not override role-based delegation, the anti-pattern registry, or the design-gate / implementation-gate separation.

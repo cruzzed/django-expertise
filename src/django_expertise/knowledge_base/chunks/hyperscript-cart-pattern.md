@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Button hx-posts to cart-add targeting #cart-sidebar (outerHTML). Hyperscript: on click store original label in :original, show 'Adding...'; on htmx:afterRequest restore, then on success flash .btn-success + 'Added ✓' for 2s and bounce #cart-icon, on error flash .btn-error. Variables (:original) keep per-element state without JS closures.
 
-## Laravel / MVC default (what AI typically generates)
-React AI: an isAdding/isAdded state machine per product card with useState, setTimeout cleanup in useEffect, and a cart context provider re-rendering the icon. Laravel Livewire: wire:loading states.
+## Typical MVC default (what AI typically generates)
+SPA-trained AI: an isAdding/isAdded state machine per product card with state hooks, setTimeout cleanup in an effect hook, and a cart context provider re-rendering the icon. Server-component default: wire-style loading attributes.
 
 ## Why Django differs
 Per-element hyperscript variables (:original) scope state to the DOM node - no global store. The cart sidebar re-renders server-side via the hx-swap, so client and server never disagree about cart contents (contrast A-011 client-side state).

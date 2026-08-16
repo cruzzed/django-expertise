@@ -8,7 +8,7 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 HYPERSCRIPT-TODO comments specify Event, Action, State, Edge cases, Notes. Translation table: classList.add -> add .x to me; textContent= -> put 'y' into #x; setTimeout(fn,2000) -> wait 2s; preventDefault -> halt the event; htmx.trigger(el,'e') -> trigger e on el. Advanced features: tell, transition, make a <div/>, repeat for, measure, fetch. Output gets a TRANSLATED-BY comment listing features used.
 
-## Laravel / MVC default (what AI typically generates)
+## Typical MVC default (what AI typically generates)
 AI rewrites handlers ad hoc with no spec comment, mixes hx-on and _ attributes on the same element, and 'improves' behavior during translation - breaking parity with the validated Phase-1 version.
 
 ## Why Django differs

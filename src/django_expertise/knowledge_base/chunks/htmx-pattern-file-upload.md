@@ -8,7 +8,7 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Set hx-encoding='multipart/form-data' on the form so files upload, and listen to htmx:xhr:progress via hx-on to drive a progress bar from event.detail.loaded/total. The view handles request.FILES normally.
 
-## Laravel / MVC default (what AI typically generates)
+## Typical MVC default (what AI typically generates)
 AI uses axios with onUploadProgress and FormData, or a dropzone library, posting to a JSON endpoint and rendering the result client-side. FormData + fetch boilerplate everywhere.
 
 ## Why Django differs

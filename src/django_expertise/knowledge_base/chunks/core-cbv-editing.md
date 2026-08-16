@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Use CreateView/UpdateView/DeleteView for model-form CRUD and FormView for non-model forms. Set model, form_class (or fields), template_name and success_url (or get_success_url()). Avoid them for multi-step wizards, inline HTMX edits (use partials), or soft deletes.
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: a controller with store/update/destroy methods doing request->validate + Model::create($validated) by hand, returning redirects. AI writes manual create/update logic instead of declaring a generic view.
+## Typical MVC default (what AI typically generates)
+Typical MVC controllers have store/update/destroy methods doing inline validation and manual model creation by hand, returning redirects. AI writes manual create/update logic instead of declaring a generic view.
 
 ## Why Django differs
 Django's generic editing CBVs encode the entire GET-form/POST-validate/save/redirect cycle declaratively. Overriding hooks (form_valid, get_success_url) is the extension point; reimplementing the cycle in every view is boilerplate the framework already solved.

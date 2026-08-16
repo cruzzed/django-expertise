@@ -205,7 +205,7 @@ When invoked, you must:
 
 - Write Hyperscript (`_="..."` attributes) — that is Phase 2, owned by `spa-evolver`.
 - Use inline `<script>` tags for interactivity.
-- Introduce React, Vue, Angular, jQuery, or any SPA framework for interactivity.
+- Introduce any SPA framework or imperative DOM-manipulation library for interactivity.
 - Use client-side routing for internal apps (A-009) — use `hx-boost` + server-side routing.
 - Return or request JSON from HTMX endpoints (A-010) — HTMX expects HTML partials.
 - Store state in `hx-vals` or data attributes where the server should own it (A-011).
