@@ -70,14 +70,19 @@ def build_mcp_server():
         return result.to_dict()
 
     @mcp.tool()
-    def browser_snapshot(url: str) -> str:
-        """Capture the rendered HTML of a page or HTMX partial target."""
-        return browser.capture_snapshot(url, headless=True)
+    def browser_snapshot(url: str, full: bool = False) -> dict:
+        """Capture the rendered HTML of a page or HTMX partial target.
+
+        Returns a dict with the HTML truncated to 2000 characters by default;
+        pass full=True to disable truncation.
+        """
+        result = browser.capture_snapshot(url, headless=True, full=full)
+        return result.to_dict()
 
     @mcp.tool()
-    def htmx_trace(url: str, target: str | None = None, swap: str = "innerHTML") -> dict:
+    def htmx_trace(url: str, swap: str = "innerHTML", selector: str | None = None) -> dict:
         """Trace an HTMX request/response cycle and return headers, status, and HTML."""
-        result = browser.trace_htmx(url, target=target, swap=swap, headless=True)
+        result = browser.trace_htmx(url, swap=swap, selector=selector, headless=True)
         return result.to_dict()
 
     @mcp.tool()

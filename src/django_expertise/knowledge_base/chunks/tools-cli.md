@@ -38,6 +38,8 @@ After installing, add this line to your project's `AGENTS.md`:
 
 > Always read `.kimi-code/knowledge-base/chunks/tools-cli.md` for using `django-expertise` tooling.
 
+Alternatively, invoke the `django-expertise-setup` skill to let the agent discover the installed artifacts and link them into your agent harness automatically.
+
 ## `django-expertise kb`
 
 Inspect the bundled knowledge base.
@@ -86,37 +88,23 @@ Flags:
 Insert or remove temporary debug probes into functions at runtime.
 
 ```bash
-django-expertise debug probe insert sales.views.checkout#process_payment --type print
-django-expertise debug probe insert sales.views.checkout#process_payment --type breakpoint
-django-expertise debug probe remove sales.views.checkout#process_payment
+django-expertise debug probe insert sales.views.checkout --type print
+django-expertise debug probe insert sales.views.checkout --type breakpoint
+django-expertise debug probe remove sales.views.checkout
 django-expertise debug probe list
 ```
 
 Probe types:
-- `print` — log entry/exit and arguments
-- `breakpoint` — pause execution (uses `ipdb` if available)
+- `print` — insert a bare marker `print()` at the start of the function
+- `breakpoint` — insert a builtin `breakpoint()` call at the start of the function
 
 ### `debug analyze-request`
 
-Analyze a Django HTTP response for HTMX headers, SQL, templates, and timing.
+Analyze a Django HTTP response for status code, templates, context keys, and SQL count (when django-debug-toolbar is configured).
 
 ```bash
 django-expertise debug analyze-request /sales/checkout/ --htmx
 ```
-
-### `debug last-request`
-
-Print the last captured MVT observation as JSON. Requires either `DJANGO_SETTINGS_MODULE` (direct call) or a running dev server (HTTP mode).
-
-```bash
-# Direct mode
-cd myproject && DJANGO_SETTINGS_MODULE=myproject.settings django-expertise debug last-request
-
-# HTTP mode
-django-expertise debug last-request --host 127.0.0.1 --port 8000
-```
-
-The observation includes request/response metadata, SQL queries, rendered templates, FormView state, `form.errors`, and rendered error counts.
 
 ## `django-expertise browser`
 
@@ -132,19 +120,31 @@ django-expertise browser console --url http://localhost:8000/sales/checkout --cl
 
 ### `browser snapshot`
 
-Capture rendered HTML.
+Capture rendered HTML. Returns JSON with `html` truncated to 2000 characters by default to keep agent context small.
 
 ```bash
 django-expertise browser snapshot --url http://localhost:8000/sales/checkout
+django-expertise browser snapshot --url http://localhost:8000/sales/checkout --full
 ```
+
+Flags:
+- `--full` — return the complete HTML without truncation
 
 ### `browser htmx-trace`
 
 Trace an HTMX request/response cycle.
 
 ```bash
+# Direct AJAX trace against an endpoint
+django-expertise browser htmx-trace --url http://localhost:8000/sales/checkout
+
+# Click an element on a page and trace the HTMX request it triggers
 django-expertise browser htmx-trace --url http://localhost:8000/sales/checkout --selector "#save-btn"
 ```
+
+Flags:
+- `--selector` — CSS selector of the element to click; the tool navigates to `--url`, clicks the element, and captures the resulting HTMX request/response. If omitted, the tool makes a direct `htmx.ajax` call against `--url`.
+- `--swap` — HTMX swap strategy for direct AJAX mode (default: `innerHTML`)
 
 ## `django-expertise setup-devuser`
 
@@ -172,7 +172,7 @@ django-expertise mcp --transport stdio
 django-expertise mcp --transport sse --port 8001
 ```
 
-MCP tools include `sentinel_scan`, `router_route`, `debug_probe_insert`, `debug_probe_remove`, `browser_snapshot`, `browser_htmx_trace`, `setup_devuser`, and `seed_fixtures`.
+MCP tools include `list_probes`, `insert_probe`, `remove_probe`, `analyze_request`, `browser_console`, `browser_snapshot`, `htmx_trace`, and `setup_devuser`.
 
 ## `django-expertise-sentinel`
 

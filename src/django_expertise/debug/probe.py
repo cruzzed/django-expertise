@@ -75,12 +75,24 @@ def _save_ledger(records: list[ProbeRecord], project_root: Path | None = None) -
 
 
 def _resolve_function_path(function_path: str):
-    """Return (module_name, qualname) for a dotted function path.
+    """Return (module_name, qualname) for a dotted or hash-separated function path.
 
     Examples:
         sales.views.checkout -> ("sales.views", "checkout")
         sales.views.OrderView.post -> ("sales.views", "OrderView.post")
+        sales.views.checkout#process_payment -> ("sales.views.checkout", "process_payment")
     """
+    # Hash-separated form: module#qualname
+    if "#" in function_path:
+        module_name, qualname = function_path.split("#", 1)
+        if not module_name or not qualname:
+            raise ValueError(f"Invalid function path: {function_path}")
+        try:
+            __import__(module_name)
+        except ImportError as exc:
+            raise ValueError(f"Could not import module {module_name}") from exc
+        return module_name, qualname
+
     parts = function_path.split(".")
     if len(parts) < 2:
         raise ValueError(f"function_path must contain at least module.name: {function_path}")
