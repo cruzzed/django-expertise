@@ -112,6 +112,10 @@ def cmd_install(args):
             f"'Always read {base / 'knowledge-base' / 'chunks' / 'tools-cli.md'} "
             f"when using django-expertise debug tooling.'"
         )
+        print(
+            "Or invoke the `django-expertise-setup` skill to let the agent "
+            "discover and link the installed artifacts automatically."
+        )
     return 0
 
 
@@ -229,16 +233,18 @@ def cmd_browser(args):
             return 0
 
         if browser_command == "snapshot":
-            html = browser.capture_snapshot(args.url, headless=not args.visible)
-            print(html)
+            result = browser.capture_snapshot(
+                args.url,
+                headless=not args.visible,
+                full=args.full,
+            )
+            print(json.dumps(result.to_dict(), indent=2))
             return 0
 
         if browser_command == "htmx-trace":
             result = browser.trace_htmx(
                 args.url,
-                target=args.target,
                 swap=args.swap,
-                trigger=args.trigger,
                 selector=args.selector,
                 headless=not args.visible,
             )
@@ -421,15 +427,14 @@ def main(argv=None):
 
     browser_snapshot_parser = browser_sub.add_parser("snapshot", help="Capture rendered HTML")
     browser_snapshot_parser.add_argument("--url", required=True, help="URL to open")
+    browser_snapshot_parser.add_argument("--full", action="store_true", help="Return full HTML instead of truncating to 2000 chars")
     browser_snapshot_parser.add_argument("--visible", action="store_true", help="Run browser in visible mode")
     browser_snapshot_parser.set_defaults(func=cmd_browser)
 
     browser_htmx_parser = browser_sub.add_parser("htmx-trace", help="Trace an HTMX request/response cycle")
-    browser_htmx_parser.add_argument("--url", required=True, help="HTMX endpoint URL")
-    browser_htmx_parser.add_argument("--target", help="HTMX target selector")
-    browser_htmx_parser.add_argument("--swap", default="innerHTML", help="HTMX swap strategy")
-    browser_htmx_parser.add_argument("--trigger", default="click", help="HTMX trigger (default: click)")
-    browser_htmx_parser.add_argument("--selector", help="Element selector to trigger the request")
+    browser_htmx_parser.add_argument("--url", required=True, help="Page URL (with --selector) or HTMX endpoint URL (direct mode)")
+    browser_htmx_parser.add_argument("--swap", default="innerHTML", help="HTMX swap strategy for direct mode (default: innerHTML)")
+    browser_htmx_parser.add_argument("--selector", help="CSS selector of element to click to trigger the HTMX request")
     browser_htmx_parser.add_argument("--visible", action="store_true", help="Run browser in visible mode")
     browser_htmx_parser.set_defaults(func=cmd_browser)
 
