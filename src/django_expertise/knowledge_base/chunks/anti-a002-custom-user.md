@@ -8,7 +8,7 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Extend AbstractUser for simple extra fields, add a OneToOne Profile model, or use a JSONField. If customizing, do it at project start and reference via get_user_model().
 
-## Laravel / MVC default (what AI typically generates)
+## Typical MVC default (what AI typically generates)
 Extending AbstractBaseUser with a full custom user (custom password hashing, USERNAME_FIELD, user manager) just to add a phone number - or bolting on a JWT auth package.
 
 ## Why Django differs

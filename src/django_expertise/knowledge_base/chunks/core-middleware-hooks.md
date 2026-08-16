@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Custom middleware subclasses django.utils.deprecation.MiddlewareMixin (or plain __call__ style). Hooks: process_request, process_view (runs before the view, can short-circuit with a response), process_template_response (post-view, can modify/replace the template of a TemplateResponse).
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: middleware with handle($request, Closure $next) classes registered in Kernel; the before/after mental model is similar, but AI also suggests Express-style app.use() chains or doing request-flag decoration in each controller manually.
+## Typical MVC default (what AI typically generates)
+Typical MVC frameworks register middleware classes that wrap the request/response cycle; the before/after mental model is similar, but AI also suggests app.use()-style middleware chains or doing request-flag decoration in each controller manually.
 
 ## Why Django differs
 Django middleware is onion-ordered around the view and is the canonical place for cross-cutting request decoration - e.g. attaching request.htmx for HTMX-aware views (spec §4.3) - instead of repeating header checks in every view.

@@ -46,7 +46,7 @@ _RULES = [
                    r"keyboard shortcut|command palette|accordion|dropdown|"
                    r"react|vue|angular)\b", re.I),
         "All client-side interactivity starts in Phase 1 (vanilla JS via hx-on:*). "
-        "React/Vue/Angular requests are redirected here per success criteria.",
+        "SPA-framework requests are redirected here per success criteria.",
     ),
     (
         "django-rtfm-dev",

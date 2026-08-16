@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 annotate() adds a computed column to each row of a QuerySet (per-object Sum/Count); aggregate() reduces the whole QuerySet to a single dict of values. Use them to push computation into SQL instead of Python loops.
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: DB::table('orders')->selectRaw('SUM(...)') raw selects, or computing totals in a collection map() after fetching all rows. Rails: pluck + Ruby sum. AI often fetches rows then computes totals in Python/PHP.
+## Typical MVC default (what AI typically generates)
+Common AI-generated patterns: raw SUM(...) selects through the query builder, or computing totals in a collection map after fetching all rows. AI often fetches rows then computes totals in application code.
 
 ## Why Django differs
 Django's ORM exposes SQL aggregation declaratively so the database does the work in one query; computing in Python after Model.objects.all() is both an N+1-style waste and a memory blowup.

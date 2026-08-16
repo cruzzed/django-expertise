@@ -8,7 +8,7 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Auto-dismiss alert: on load wait 5s then transition opacity to 0 over 1s then remove me. Copy button: on click writeText(...) on navigator.clipboard, give 'Copied!' feedback, wait 2s, restore label - all inline in the _ attribute.
 
-## Laravel / MVC default (what AI typically generates)
+## Typical MVC default (what AI typically generates)
 AI pulls in a toast/notification library and a clipboard JS package, or writes addEventListener + setTimeout + classList boilerplate per element in a <script> block (forbidden by the HTMX gate).
 
 ## Why Django differs

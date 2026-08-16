@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Always reference the user model via django.contrib.auth.get_user_model() (or settings.AUTH_USER_MODEL in ForeignKeys). For simple extra fields extend AbstractUser once at project start, or add a OneToOne Profile; reserve AbstractBaseUser for a genuinely different authentication scheme.
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: php artisan make:auth + editing the shipped User model and adding columns freely; or installing a JWT package. Rails: devise with whatever columns. AI often jumps to AbstractBaseUser + full custom user for a couple of profile fields, or hardcodes from django.contrib.auth.models import User.
+## Typical MVC default (what AI typically generates)
+Typical MVC frameworks ship scaffolded auth whose User model gets edited freely, or AI installs a JWT package. AI often jumps to AbstractBaseUser + full custom user for a couple of profile fields, or hardcodes from django.contrib.auth.models import User.
 
 ## Why Django differs
 Django decouples the user model through the swappable AUTH_USER_MODEL setting; get_user_model() keeps code working when projects swap it. AbstractBaseUser forces you to reimplement authentication machinery - the spec's anti-pattern A-002.

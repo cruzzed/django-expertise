@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 django.contrib.postgres adds ArrayField, HStoreField, enhanced JSONField lookups, full-text search (SearchVector, SearchQuery, SearchRank), and trigram similarity - only usable with a PostgreSQL backend.
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: Eloquent has no typed array/hstore fields; AI writes whereRaw("data->>'key' = ?") JSON queries or installs an external full-text/scout + Algolia/Meilisearch service before checking database-native search.
+## Typical MVC default (what AI typically generates)
+Typical MVC ORMs have no typed array/hstore fields; AI writes raw JSON-path WHERE queries or installs an external full-text search service before checking database-native search.
 
 ## Why Django differs
 Django exposes Postgres power features as first-class ORM fields and expressions. Built-in full-text search covers most app search needs without an external search service, and ArrayField/JSONField keep schemas typed and queryable.

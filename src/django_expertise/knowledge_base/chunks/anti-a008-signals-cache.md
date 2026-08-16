@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Invalidate caches explicitly in the model's save()/delete() overrides or in a service-layer function, right next to the mutation that requires it.
 
-## Laravel / MVC default (what AI typically generates)
-A post_save receiver calling cache.delete(...) (or Laravel's saved event flushing cache tags) - chosen because it 'just works' without touching call sites.
+## Typical MVC default (what AI typically generates)
+A post_save receiver calling cache.delete(...) (or a typical MVC model 'saved' event flushing cache tags) - chosen because it 'just works' without touching call sites.
 
 ## Why Django differs
 Signal-driven invalidation races (receiver runs before transaction commit), fires on fixtures/bulk ops unexpectedly, and hides the cache dependency from anyone reading the mutation code. Explicit calls are atomic-adjacent and grep-able.

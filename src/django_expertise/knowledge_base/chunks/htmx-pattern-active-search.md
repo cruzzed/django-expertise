@@ -8,11 +8,11 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Search input with hx-trigger='keyup changed delay:300ms, search', hx-target a results div, hx-indicator spinner, and hx-push-url='true' so results are bookmarkable. The view filters with Q objects and returns only the results partial; value='{{ request.GET.q }}' restores state on full loads.
 
-## Laravel / MVC default (what AI typically generates)
-AI wires a React search component hitting /api/search?q= JSON endpoint, with useEffect debouncing and client-side rendering of results. Or jQuery keyup + $.get + manual .html().
+## Typical MVC default (what AI typically generates)
+AI wires a client-side search component hitting a /api/search?q= JSON endpoint, with effect-hook debouncing and client-side rendering of results. Or a legacy keyup handler firing an AJAX GET and manually replacing the result HTML.
 
 ## Why Django differs
-Server-side Q-object filtering over icontains (or contrib.postgres full-text search) returns rendered HTML directly; hx-push-url keeps the address bar honest so refresh/back work - the React version needs a router and state hydration to match that.
+Server-side Q-object filtering over icontains (or contrib.postgres full-text search) returns rendered HTML directly; hx-push-url keeps the address bar honest so refresh/back work - the SPA version needs a router and state hydration to match that.
 
 ## Example
 <input type="search" name="q" placeholder="Search products..."

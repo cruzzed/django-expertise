@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Enable django.contrib.admin, register models with ModelAdmin subclasses configured via list_display, list_filter, search_fields, inlines, actions. Customize look with django-jazzmin/django-admin-interface before ever building a custom dashboard.
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: install Nova/Filament or hand-roll a React/Vue admin panel with a JSON API. Rails: ActiveAdmin gem or custom scaffold controllers. AI frequently scaffolds an entire SPA CRUD admin because the Django admin 'looks bad'.
+## Typical MVC default (what AI typically generates)
+Typical MVC frameworks rely on third-party admin packages or a hand-rolled SPA admin panel with a JSON API. AI frequently scaffolds an entire SPA CRUD admin because the Django admin 'looks bad'.
 
 ## Why Django differs
 The admin is a flagship Django battery: permissions-aware CRUD with zero views written. Anti-pattern A-005 (reinventing the admin) exists precisely because AI defaults to building dashboards that ModelAdmin + theming already provides.

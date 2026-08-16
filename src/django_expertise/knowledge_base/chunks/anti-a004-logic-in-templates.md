@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Templates are presentation-only: compute in model methods/properties (can_cancel, display_total), Manager methods, or View context; templates just render {{ }} and simple {% if %} on precomputed values.
 
-## Laravel / MVC default (what AI typically generates)
-Complex {% if %} chains and custom template tags doing database work - the equivalent of fat Blade templates with @php blocks and Eloquent queries inside views, which AI produces from Laravel training data.
+## Typical MVC default (what AI typically generates)
+Complex {% if %} chains and custom template tags doing database work - the equivalent of fat MVC templates with inline code blocks and ORM queries inside views, which AI produces from mainstream MVC training data.
 
 ## Why Django differs
 Django's template language is deliberately limited (no arbitrary Python) to enforce the MVT boundary: logic in templates is untestable, un-cacheable, and hides queries. Model methods make the logic reusable across views, admin, and APIs.

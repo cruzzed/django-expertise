@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 hx-target picks the element to update (CSS selector, closest/find/this); hx-swap controls how (innerHTML default, outerHTML, beforeend, afterbegin, beforebegin, afterend, delete, none - plus modifiers like transition:true). hx-select extracts a subset of the response; hx-swap-oob on response elements swaps extra targets out-of-band.
 
-## Laravel / MVC default (what AI typically generates)
-React/Vue-trained AI: re-render a client-side component subtree from JSON state, or manually element.innerHTML = data in a fetch callback with no swap semantics. jQuery default: $('#list').html(response).
+## Typical MVC default (what AI typically generates)
+AI trained on SPA frameworks often re-renders a client-side component subtree from JSON state, or manually sets element.innerHTML = data in a fetch callback with no swap semantics. Legacy AJAX default: select the container and replace its HTML with the raw response.
 
 ## Why Django differs
 HTMX pushes swap mechanics into declarative HTML so the Django view just returns a partial template. outerHTML replacing the triggering row is the canonical 'row update' idiom, and OOB swaps let one request update several page regions - something JSON APIs need extra client code for.

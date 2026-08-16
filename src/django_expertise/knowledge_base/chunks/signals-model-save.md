@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 pre_save/post_save receivers are for framework-level concerns like audit logging - NOT emails, cache updates, or business side effects (anti-patterns A-001/A-008). Connect with @receiver(post_save, sender=Order) in a signals.py imported from AppConfig.ready().
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: model events/observers (Order::created(fn) in boot or Observer classes) used liberally for sending mail and updating totals; AI routinely puts business side effects in Eloquent observers because Laravel culture encourages it.
+## Typical MVC default (what AI typically generates)
+Typical MVC ORMs offer model events/observers used liberally for sending mail and updating totals; AI routinely puts business side effects in model observers because mainstream MVC training data encourages it.
 
 ## Why Django differs
 Django culture treats signals as hidden control flow: a post_save that emails users makes save() do surprising things, breaks in bulk operations, and is hard to debug. Explicit service-layer calls in the view keep the flow visible and testable.

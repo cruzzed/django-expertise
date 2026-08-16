@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 One Django view serves both worlds: check request.headers.get('HX-Request') and return a partial template (_task_row.html / _task_list.html) for HTMX requests, the full page template otherwise. Handles GET and POST branches separately so POST+HX returns just the new row.
 
-## Laravel / MVC default (what AI typically generates)
-AI defaults to separate /api/tasks JSON endpoints plus a JS frontend, or two controllers (web + api) in Laravel (Route::resource + apiResource). Duplicated endpoints and a client-side renderer.
+## Typical MVC default (what AI typically generates)
+AI defaults to separate /api/tasks JSON endpoints plus a JS frontend, or two parallel controllers (web + api) in typical MVC frameworks. Duplicated endpoints and a client-side renderer.
 
 ## Why Django differs
 A single view with a template switch preserves one URL, one permission check, one queryset - and gives graceful degradation for free (no-JS browsers get the full page). Returning HTML partials instead of JSON is explicitly the HTMX way (A-010).

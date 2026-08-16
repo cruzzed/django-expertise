@@ -125,7 +125,7 @@ anti_patterns:
   - id: A-009
     name: Client-Side Routing for Internal Apps
     why_wrong: Unnecessary complexity; breaks Django's URL resolver, template rendering and auth/session integration.
-    django_way: hx-boost + server-side routing; HTMX/Hyperscript only, no React/Vue/Angular.
+    django_way: hx-boost + server-side routing; HTMX/Hyperscript only, no SPA frameworks.
     ref: https://htmx.org/attributes/hx-boost/
     severity: error
     detectors:

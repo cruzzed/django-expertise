@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 pre_delete/post_delete suit cascade cleanup like deleting files from storage after the row goes away. m2m_changed (with action in pre_add/post_add/pre_remove/post_remove/pre_clear/post_clear) tracks many-to-many membership changes.
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: deleting/deleted model events and pivot sync observers; AI often uses these events to trigger business logic (notifications on tag changes) rather than purely mechanical cleanup.
+## Typical MVC default (what AI typically generates)
+Typical MVC ORMs fire deleting/deleted model events and pivot sync observers; AI often uses these events to trigger business logic (notifications on tag changes) rather than purely mechanical cleanup.
 
 ## Why Django differs
 Django sanctions these signals for resource hygiene (removing an uploaded file whose row was deleted) where there is no natural explicit call site. Business rules triggered by membership changes belong in the service layer, not the receiver.

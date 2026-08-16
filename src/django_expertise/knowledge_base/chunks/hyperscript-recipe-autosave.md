@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Form with hx-trigger='keyup changed delay:1s from :is(input, textarea, select)' autosaves any field; hyperscript listens on htmx:beforeRequest to show 'Saving...' and htmx:afterRequest to show success/failure with conditional class changes using event.detail.successful.
 
-## Laravel / MVC default (what AI typically generates)
-AI implements a useEffect debounce per field in React with a global saving boolean in state, or jQuery .on('input') + setTimeout chains per form, duplicating the status-label logic each time.
+## Typical MVC default (what AI typically generates)
+AI implements an effect-hook debounce per field in a SPA component with a global saving boolean in state, or imperative .on('input') + setTimeout chains per form, duplicating the status-label logic each time.
 
 ## Why Django differs
 The declarative hx-trigger from: modifier autosaves the whole form with one attribute; hyperscript reads event.detail.successful directly for the status branch. Behavior identical to the Phase-1 hx-on version, but declarative - per the two-phase workflow.

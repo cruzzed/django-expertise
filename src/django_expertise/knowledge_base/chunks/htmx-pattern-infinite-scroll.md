@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 A sentinel div after the page items issues hx-get for the next page when it scrolls into view (hx-trigger='revealed'), appending with hx-swap='beforeend'. The view paginates with Django's Paginator/ListView and the partial re-renders the next sentinel only if page_obj.has_next.
 
-## Laravel / MVC default (what AI typically generates)
-AI installs a JS infinite-scroll library (or IntersectionObserver by hand) plus a JSON paginated API, then client-renders each item from a template literal. Laravel default: cursor pagination API consumed by axios.
+## Typical MVC default (what AI typically generates)
+AI installs a JS infinite-scroll library (or IntersectionObserver by hand) plus a JSON paginated API, then client-renders each item from a template literal. Typical MVC default: a cursor pagination API consumed by an HTTP client.
 
 ## Why Django differs
 Django's Paginator already paginates; the sentinel + revealed trigger turns pagination into progressive enhancement. Because the response includes the next sentinel only when has_next, the mechanism terminates naturally with zero client state.

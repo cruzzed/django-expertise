@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 hx-boost='true' turns ordinary links/forms into AJAX navigations for SPA-like feel while keeping Django's server-side routing (anti-pattern A-009 forbids client-side routers). hx-push-url updates the browser URL; hx-history-elt picks the element snapshotted for history restores; hx-preserve keeps an element across swaps; hx-encoding='multipart/form-data' for file uploads; hx-ext loads extensions; hx-on:* binds inline event handlers (Phase 1).
 
-## Laravel / MVC default (what AI typically generates)
-React SPA default: react-router with client-side routes plus a JSON API, history managed by the router library, forms handled with controlled components and preventDefault.
+## Typical MVC default (what AI typically generates)
+SPA default: a client-side router library with client-side routes plus a JSON API, history managed by the router library, forms handled with controlled components and preventDefault.
 
 ## Why Django differs
 Django already has a URL resolver, back-button semantics via the browser, and form handling - hx-boost composes with them instead of replacing them. The app works without JS (links still navigate), which is the graceful-degradation gate; a client router breaks that contract.

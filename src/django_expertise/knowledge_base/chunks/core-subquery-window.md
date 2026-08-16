@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Subquery with OuterRef builds correlated subqueries (e.g. latest price per product); django.db.models.functions.Window provides ROW_NUMBER, RANK etc. over partitions - both keep set-based logic in one SQL round-trip.
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: DB::select with hand-written correlated SQL or lateral joins; Eloquent has no first-class window API, so AI reaches for addSelect(DB::raw(...)) or post-processing collections in PHP.
+## Typical MVC default (what AI typically generates)
+Typical MVC ORMs have no first-class window API, so AI reaches for hand-written correlated SQL, lateral joins via raw select statements, or post-processing collections in application code.
 
 ## Why Django differs
 Django's expression API (Subquery, OuterRef, Window) models these SQL constructs as typed, composable ORM objects. You get correlated subqueries and window functions without dropping to raw SQL, preserving portability and parameterization.

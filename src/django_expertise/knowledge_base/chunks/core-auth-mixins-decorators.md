@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Use @login_required for FBVs and LoginRequiredMixin / PermissionRequiredMixin / UserPassesTestMixin for CBVs. LoginRequiredMixin MUST be the first class in the MRO: class MyView(LoginRequiredMixin, ListView).
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: ->middleware('auth') on routes, or $this->authorize() inside controller methods. Rails: before_action :authenticate_user!. AI often writes middleware-style route config or forgets mixin ordering, producing a view that ignores the check.
+## Typical MVC default (what AI typically generates)
+Typical MVC frameworks attach auth middleware to routes or call authorize hooks inside controller methods. AI often writes middleware-style route config or forgets mixin ordering, producing a view that ignores the check.
 
 ## Why Django differs
 Django enforces access at the view class level via cooperative multiple inheritance. Mixin order matters because dispatch() resolution follows the MRO - putting LoginRequiredMixin after ListView silently skips authentication.

@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 sitemaps generates XML sitemaps from Sitemap classes (items(), lastmod(), changefreq); syndication generates RSS/Atom feeds by subclassing Feed with items(), item_title(), item_description(). Wire both into urls.py.
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: spatie/laravel-sitemap package or hand-built Blade XML views; Rails: hand-written builder templates for RSS. AI installs SEO/feed third-party packages or string-builds XML by hand - both flagged in the spec's decision tree.
+## Typical MVC default (what AI typically generates)
+Typical MVC stacks rely on third-party sitemap/feed packages or hand-built XML views. AI installs SEO/feed third-party packages or string-builds XML by hand - both flagged in the spec's decision tree.
 
 ## Why Django differs
 These are classic Django batteries with first-class hooks into the ORM and URL resolver. Hand-rolled XML generators are error-prone (escaping, dates) and duplicate what contrib already maintains.

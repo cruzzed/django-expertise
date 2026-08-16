@@ -8,8 +8,8 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Use select_related() for foreign-key and one-to-one relations (single SQL JOIN) and prefetch_related() for many-to-many and reverse-FK relations (separate batched queries). Call them in the View's get_queryset(), never rely on the template to trigger lazy lookups.
 
-## Laravel / MVC default (what AI typically generates)
-Laravel: ->with('category') eager loading on the Eloquent query, or worse, letting Blade templates trigger lazy loading ($product->category->name in a loop). Rails: includes(:category). AI frequently omits eager loading entirely because training examples show naive loops.
+## Typical MVC default (what AI typically generates)
+Typical MVC ORMs offer eager-loading directives on the query, or worse, let templates trigger lazy loading (traversing a relation per row in a loop). AI frequently omits eager loading entirely because training examples show naive loops.
 
 ## Why Django differs
 Django does no automatic eager loading; every attribute traversal across a relation in a template is a SQL query. Explicit select_related/prefetch_related in the View is the documented fix for N+1 and is the View's responsibility under MVT.

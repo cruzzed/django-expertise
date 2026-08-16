@@ -8,7 +8,7 @@
 ## Canonical pattern (Django / HTMX / Hyperscript way)
 Two custom tags (spec §4.4): an inclusion tag htmx_partial wrapping partial rendering with shared context, and a simple_tag hx_attrs that generates hx-get/hx-post/... attributes with URL resolution via reverse() - {% hx_attrs get=('task-update' task.id) target='#row' %}.
 
-## Laravel / MVC default (what AI typically generates)
+## Typical MVC default (what AI typically generates)
 AI hardcodes hx-post='/tasks/5/update/' strings in every template (brittle when URLs change), or generates attribute markup in JS, or builds a mini frontend-routing table.
 
 ## Why Django differs
