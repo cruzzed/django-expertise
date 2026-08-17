@@ -10,3 +10,4 @@ venv/
 .mypy_cache/
 *.swp
 .DS_Store
+temp
