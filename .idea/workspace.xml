@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="ALL" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ec33513a-a911-4b24-a58f-d90b004661d8" name="Changes" comment="chore: temp gitignored" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EmbeddingIndexingInfo">
+    <option name="cachedIndexableFilesCount" value="346" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="staging/v0.2.0" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;cruzzed&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/cruzzed/django-expertise.git&quot;,
+    &quot;accountId&quot;: &quot;335aa18e-7824-4f83-bedf-5e1070049364&quot;
+  }
+}</component>
+  <component name="McpProjectServerCommands">
+    <commands />
+    <urls />
+  </component>
+  <component name="NextEditCompletionFeaturesState">
+    <decayedCancelled>
+      <entry key="MS100" value="1.1892776931809754" />
+      <entry key="MS500" value="3.1893131618120645" />
+      <entry key="S2" value="6.1777664287323315" />
+      <entry key="S5" value="8.008285057816519" />
+      <entry key="S10" value="8.900997520507694" />
+      <entry key="S30" value="9.910265864094193" />
+      <entry key="S60" value="11.117573086073184" />
+      <entry key="M2" value="13.29799667511912" />
+      <entry key="M5" value="18.28829387904687" />
+      <entry key="M10" value="22.475612885941086" />
+      <entry key="M15" value="24.497377058404286" />
+      <entry key="M30" value="26.967278452661798" />
+      <entry key="H1" value="28.40783133120909" />
+      <entry key="H2" value="29.378855780802493" />
+      <entry key="H4" value="31.327612879319933" />
+      <entry key="D1" value="40.958521676829776" />
+      <entry key="W1" value="45.160756937200425" />
+    </decayedCancelled>
+    <decayedSelected>
+      <entry key="MS100" value="0.0" />
+      <entry key="MS500" value="0.0" />
+      <entry key="S2" value="0.0" />
+      <entry key="S5" value="0.0" />
+      <entry key="S10" value="0.0" />
+      <entry key="S30" value="0.0" />
+      <entry key="S60" value="0.0" />
+      <entry key="M2" value="0.0" />
+      <entry key="M5" value="0.0" />
+      <entry key="M10" value="0.0" />
+      <entry key="M15" value="0.0" />
+      <entry key="M30" value="0.0" />
+      <entry key="H1" value="0.0" />
+      <entry key="H2" value="0.0" />
+      <entry key="H4" value="0.0" />
+      <entry key="D1" value="0.0" />
+      <entry key="W1" value="0.0" />
+    </decayedSelected>
+    <decayedShown>
+      <entry key="MS100" value="1.1220717036359595" />
+      <entry key="MS500" value="3.1491718256841326" />
+      <entry key="S2" value="6.158033846992937" />
+      <entry key="S5" value="7.998056537078491" />
+      <entry key="S10" value="8.895316629697197" />
+      <entry key="S30" value="9.908160057922379" />
+      <entry key="S60" value="11.116213268515159" />
+      <entry key="M2" value="13.296582920126385" />
+      <entry key="M5" value="18.286944468919" />
+      <entry key="M10" value="22.47465105114826" />
+      <entry key="M15" value="24.496650895642492" />
+      <entry key="M30" value="26.966866049451628" />
+      <entry key="H1" value="28.407611320229776" />
+      <entry key="H2" value="29.378741882015227" />
+      <entry key="H4" value="31.327554072762137" />
+      <entry key="D1" value="40.95851084912436" />
+      <entry key="W1" value="45.16075533074584" />
+    </decayedShown>
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8,
+  &quot;fromUser&quot;: false
+}</component>
+  <component name="ProjectId" id="3HOnWrKDHeSHNlT4CVc2VdgpaPr" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "git-widget-placeholder": "staging/v0.2.0-backup",
+    "last_opened_file_path": "/home/franki/PycharmProjects/django-expertise/temp",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.jshint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.jshint": "",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/temp" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docs/research" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-4abd2a77f808-JavaScript-PY-262.8665.369" />
+        <option value="bundled-python-sdk-6fa658e1df1a-5bd6d13a2a75-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-262.8665.369" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ec33513a-a911-4b24-a58f-d90b004661d8" name="Changes" comment="" />
+      <created>1785748017167</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1785748017167</updated>
+      <workItem from="1785748018741" duration="31617000" />
+      <workItem from="1786351426611" duration="5602000" />
+      <workItem from="1786882072300" duration="16077000" />
+    </task>
+    <task id="LOCAL-00001" summary="update README.md">
+      <option name="closed" value="true" />
+      <created>1785907916255</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1785907916255</updated>
+    </task>
+    <task id="LOCAL-00002" summary="draft 0.2: added more tooling and some dependencies.">
+      <option name="closed" value="true" />
+      <created>1785909754871</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1785909754871</updated>
+    </task>
+    <task id="LOCAL-00003" summary="draft 0.2: added more tooling and some dependencies.">
+      <option name="closed" value="true" />
+      <created>1786001727064</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1786001727064</updated>
+    </task>
+    <task id="LOCAL-00004" summary="chore: temp gitignored">
+      <option name="closed" value="true" />
+      <created>1786931260792</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1786931260792</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update README.md" />
+    <MESSAGE value="draft 0.2: added more tooling and some dependencies." />
+    <MESSAGE value="chore: temp gitignored" />
+    <option name="LAST_COMMIT_MESSAGE" value="chore: temp gitignored" />
+  </component>
+</project>
